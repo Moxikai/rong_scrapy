@@ -1,6 +1,7 @@
 .cache/
 .idea/
-.DS_Store
+*.DS_Store
 *.pyc
 .scrapy/
 test*
+*.db

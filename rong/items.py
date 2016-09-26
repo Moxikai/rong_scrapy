@@ -5,10 +5,10 @@
 # See documentation in:
 # http://doc.scrapy.org/en/latest/topics/items.html
 
-import scrapy
+
 from scrapy import Item,Field
 
-class PlatformItem(Item):
+class Rong360Item(Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
 
@@ -30,20 +30,7 @@ class PlatformItem(Item):
     assignmentOfDebt = Field()
     automaticBidding = Field()
     cashTime = Field()
-    abstract = Field()
-
-class PersonItem(Item):
-    pass
-    id = Field()
-    abstracts = Field()
-    platform_id = Field()
-
-
-class ProductItem(Item):
-    pass
-    id = Field()
-    name = Field()
-    annualizedReturn = Field()
-    cycle = Field()
-    remainAmount = Field()
-    platform_id = Field()
+    abstract = Field() #平台简介,类型为字符串
+    manageTeam = Field() #管理团队,类型为字符串
+    products = Field() #产品,类型为list
+    #reviews = Field() #评论,类型为list
