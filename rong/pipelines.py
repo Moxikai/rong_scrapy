@@ -58,7 +58,6 @@ class PlatformBasicSQLitePipeline():
                                 cashTime = item['cashTime'],
                                 abstract = item['abstract'],
                                 manageTeam = item['manageTeam'],
-
                                 )
             session.add(new_platform)
             session.commit()

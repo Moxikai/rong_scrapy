@@ -39,12 +39,23 @@ COOKIES_ENABLED = False
 #TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
+"""
 DEFAULT_REQUEST_HEADERS = {'Host':'www.rong360.com',
                         'Cache-Control':'max-age=0',
                         'Upgrade-Insecure-Requests':'1',
                         'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36',
                         'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
                         'Refer':'http://www.rong360.com/licai/',
+                        'Accept-Encoding':'gzip, deflate, sdch',
+                        'Accept-Language':'zh-CN,zh;q=0.8',
+                        }
+"""
+DEFAULT_REQUEST_HEADERS = {'Host':'www.p2peye.com',
+                        'Cache-Control':'max-age=0',
+                        'Upgrade-Insecure-Requests':'1',
+                        'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36',
+                        'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                        'Refer':'http://www.p2peye.com/',
                         'Accept-Encoding':'gzip, deflate, sdch',
                         'Accept-Language':'zh-CN,zh;q=0.8',
                         }
@@ -90,7 +101,7 @@ AUTOTHROTTLE_DEBUG = False
 # Enable and configure HTTP caching (disabled by default)
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
 HTTPCACHE_ENABLED = True
-HTTPCACHE_EXPIRATION_SECS = 3600000000
+HTTPCACHE_EXPIRATION_SECS = 0
 HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'

@@ -3,6 +3,7 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 import hashlib
+import urlparse
 
 from scrapy import Spider,Request
 from scrapy.loader import ItemLoader
@@ -52,8 +53,8 @@ class Rong360Spider(Spider):
 
         registeredCapital = p_list[1].xpath('text()').extract_first() #注册资金
         dateSale = p_list[3].xpath('text()').extract_first() #上线时间
-        area = p_list[5].xpath('text()').extract_first()
-        url = p_list[7].xpath('a/@href').extract_first()
+        area = p_list[5].xpath('text()').extract_first() #区域
+        url = p_list[7].xpath('a/@href').extract_first() #网址
         startMoney = p_list[9].xpath('text()').extract_first() #起投金额
         managementFee = p_list[11].xpath('text()').extract_first() #管理费
         cashTakingFee = p_list[13].xpath('text()').extract_first() #取现费用
@@ -66,6 +67,9 @@ class Rong360Spider(Spider):
         cashTime = p_list[27].xpath('text()').extract_first() #提现到账时间
 
         """计算签名,作为标示字段"""
+        url_data = urlparse.urlparse(url)
+        """去掉协议，查询参数等"""
+        url = url_data.netloc
         id = getSignName(url)
 
         """平台简介"""
