@@ -82,7 +82,7 @@ DEFAULT_REQUEST_HEADERS = {'Host':'www.p2peye.com',
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    'rong.pipelines.PlatformBasicSQLitePipeline': 300,
-    #'rong.pipelines.PlatformProductSQLitePipeline':301,
+    'rong.pipelines.PlatformProductSQLitePipeline':301,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

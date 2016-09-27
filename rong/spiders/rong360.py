@@ -5,6 +5,7 @@ sys.setdefaultencoding('utf-8')
 import hashlib
 import urlparse
 
+from bs4 import BeautifulSoup
 from scrapy import Spider,Request
 from scrapy.loader import ItemLoader
 
@@ -34,10 +35,18 @@ class Rong360Spider(Spider):
     def parse(self, response):
         """解析平台列表"""
         pass
+        soup = BeautifulSoup(response.body,'html.parser')
+        """
         names = response.xpath('//tbody[@id="ui_product_list_tbody"]/tr/td[@class="pt_name"]/a/text()').extract()
         pt_urls = response.xpath('//tbody[@id="ui_product_list_tbody"]/tr/td[@class="pt_name"]/a/@href').extract()
-        gradeFromThirds = response.xpath('//tbody[@id="ui_product_list_tbody"]/tr/td[@class="pingji"]/text()').extract()
+        gradeFromThirds = response.xpath('//tr/td[@class="pingji"]/text()').extract()
         profitAverages = response.xpath('//tbody[@id="ui_product_list_tbody"]/tr/td[@class="average"]/text()').extract()
+        """
+        names = [td.find('a').get_text() for td in soup.find_all('td',class_="pt_name")]
+        pt_urls = [td.find('a').get('href') for td in soup.find_all('td',class_="pt_name")]
+        gradeFromThirds = [td.get_text() for td in soup.find_all('td',class_="pingji")]
+        profitAverages = [td.get_text() for td in soup.find_all('td',class_="average")]
+        """清理空格"""
         names = cleanBlank(*names)
         pt_urls = cleanBlank(*pt_urls)
         gradeFromThirds = cleanBlank(*gradeFromThirds)
@@ -80,6 +89,8 @@ class Rong360Spider(Spider):
         name = response.meta['name']
         profitAverage = response.meta['profitAverage']
         gradeFromThird = response.meta['gradeFromThird']
+        if not gradeFromThird:
+            print '平台-------%s----------无法获取评级数据'%(name)
 
         """解析管理团队"""
         p_list3 = response.xpath('//div[@class="loan-msg-con tab-con"][2]/p')

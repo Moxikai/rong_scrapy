@@ -12,7 +12,8 @@ from sqlalchemy.orm import sessionmaker, relationship
 
 _baseDir = os.path.dirname(__file__)
 
-_engine = create_engine('sqlite:///' + os.path.join(_baseDir, 'data-dev.db'))
+target_DB = '/home/moxi/PycharmProjects/law_show/data-dev.db'
+_engine = create_engine('sqlite:///%s'%(target_DB))
 Base = declarative_base()
 
 _DBsession = sessionmaker(bind=_engine)
@@ -57,9 +58,8 @@ class Platform(Base):
     cashTime = Column(String(48))
     abstract = Column(Text)
     manageTeam = Column(Text)
-    #persons = relationship('Person',backref='platform')
-    #products = relationship('Product',backref='platform')
-    #companys = relationship('Company',backref='platform')
+    products = relationship('Product',backref='platform')
+    companys = relationship('Company',backref='platform')
 
 class Product(Base):
     """产品信息"""
@@ -84,7 +84,7 @@ class Company(Base):
     phoneCustomer = Column(String(48))
     address = Column(String(128))
     noteSpecial = Column(Text)
-    platform_id = Column(String(48))
+    platform_id = Column(String(48),ForeignKey('platform.id'))
 
 
 
@@ -99,6 +99,4 @@ def drop_db():
 
 
 if __name__ == '__main__':
-
-    drop_db()
     init_db()

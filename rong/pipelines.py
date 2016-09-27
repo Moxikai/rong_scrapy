@@ -82,16 +82,14 @@ class PlatformProductSQLitePipeline():
                                       name=product['name'],
                                       annualizedReturn=product['annualizedReturn'],
                                       cycle=product['cycle'],
-                                      process=product['process'],
                                       remainAmount=product['remainAmount'],
                                       platform_id=product['platform_id'],)
                 product0 = session.query(Product).filter(Product.id == id).first()
                 if product0:
-                    pass
-                    session.query(Product).filter(Product.id == product['id']).update({
-                        'annualizedReturn':product['annulizedReturn'],
+                    """更新产品"""
+                    session.query(Product).filter(Product.id == id).update({
+                        'annualizedReturn':product['annualizedReturn'],
                         'cycle':product['cycle'],
-                        'process':product['process'],
                         'remainAmount':product['remainAmount'],
                         'platform_id':product['platform_id'],
                     })
